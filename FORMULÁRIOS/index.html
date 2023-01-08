@@ -2,77 +2,110 @@
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="style.css">
 	<title>Preencha o formulário e retornaremos o contato</title>
 </head>
 <body>
-	<header>
-		<h1>Não encontrou o que procurava?</h1>
-		<p>Preencha o formulário e retornaremos o contato.</p>
-	</header>
-	<div class="contact-us">
-		<form class="contact-form">
-			<div>
-				<label for="name">Nome:</label>
-				<input type="text" id="name" required>
+	<div class="container">
+		<div>
+			<div class="py-5 text-center text-white">
+				<h2>Não encontrou o que procurava?</h2>
+				<p class="lead">Preencha o formulário e retornaremos o contato.</p>
 			</div>
-			<div>
-				<label for="e-mail">E-mail:</label>
-				<input type="email" id="e-mail" required>
-			</div>
-			<div>
-				<label for="phone-number">Telefone:</label>
-				<input type="text" id="phone-number" required>
-			</div>
-			<div>
-				<label for="birthday-date">Data de nascimento:</label>
-				<input type="date" id="birthday-date" required>
-			</div>
-			<div>
-				<label for="neighborhood">Bairro de Interesse:</label>
-				<select multiple size="5" id="neighborhood">
-					<option value="bairro1">Bairro 01</option>
-					<option value="bairro2">Bairro 02</option>
-					<option value="bairro3">Bairro 03</option>
-					<option value="bairro4">Bairro 04</option>
-					<option value="bairro5">Bairro 05</option>
-				</select>
-			</div>
-			<div>
-				<p>Período para Contato:</p>
-					<div>
-						<label for="contact-period">
-							<input type="radio" name="contact-period" value="manha">
-							Manhã
-						</label>
+			<div class="contact-us  mb-5">
+				<form class="contact-form">
+					<div class="row">
+						<div class="input-wrapper col-lg-12 mb-3">
+							<label for="name">
+								Nome:
+								<span class="required-field">*</span>
+							</label>
+							<input type="text" id="name" placeholder="Digite seu nome">
+						</div>
+						<div class="input-wrapper col-lg-12 mb-3">
+							<label for="e-mail">
+								E-mail:
+								<span class="required-field">*</span>
+							</label>
+							<input type="email" id="e-mail" placeholder="Digite seu e-mail">
+						</div>
+						<div class="input-wrapper col-md-6 mb-3">
+							<label for="phone-number">
+								Telefone:
+								<span class="required-field">*</span>
+							</label>
+							<input type="tel" id="phone-number" placeholder="(00) 00000-0000">
+						</div>
+						<div class="input-wrapper col-md-6 mb-3">
+							<label for="birthday-date">
+								Data de nascimento:
+								<span class="required-field">*</span>
+							</label>
+							<input type="date" id="birthday-date">
+						</div>
+						<div class="input-wrapper d-flex flex-column col-lg-6 mb-3">
+							<label for="neighborhood">Bairro de Interesse:</label>
+							<select class="input-wrapper" id="neighborhood">
+								<option value="bairro1">Bairro 01</option>
+								<option value="bairro2">Bairro 02</option>
+								<option value="bairro3">Bairro 03</option>
+								<option value="bairro4">Bairro 04</option>
+								<option value="bairro5">Bairro 05</option>
+							</select>
+						</div>
+						<div class="col-lg-12 mb-3">
+							<p>Período para Contato:</p>
+							<div class="d-flex flex-row">
+								<div class="mr-4">
+									<label for="contact-period">
+										<input type="radio" name="contact-period" value="manha">
+										Manhã
+									</label>
+								</div>
+								<div class="mr-4">
+									<label for="contact-period">
+										<input type="radio" name="contact-period" value="tarde">
+										Tarde
+									</label>
+								</div>
+								<div>
+									<label for="contact-period">
+										<input type="radio" name="contact-period" value="noite">
+										Noite
+									</label>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-lg-12 mb-3">
+							<p>Autoriza contato por telefone?</p>
+							<label class="mr-4" for="contact-by-phone">
+								<input type="radio" name="contact-by-phone" value="yes">
+								Sim
+							</label>
+							<label for="contact-by-phone">
+								<input type="radio" name="contact-by-phone" value="no">
+								Não
+							</label>
+						</div>
+						<div class="col-lg-12 text-center">
+							<button class="btn btn-lg button-submit text-white">Enviar</button>
+						</div>
 					</div>
-					<div>
-						<label for="contact-period">
-							<input type="radio" name="contact-period" value="tarde">
-							Tarde
-						</label>
-					</div>
-					<div>
-						<label for="contact-period">
-							<input type="radio" name="contact-period" value="noite">
-							Noite
-						</label>
-					</div>
+					
+				</form>
 			</div>
-			<div>
-				<p>Autoriza contato por telefone?</p>
-				<label for="contact-by-phone">
-					<input type="checkbox" name="contact-by-phone" value="yes">
-					Sim
-				</label>
-				<label for="contact-by-phone">
-					<input type="checkbox" name="contact-by-phone" value="no">
-					Não
-				</label>
-			</div>
-			<button>Enviar</button>
-		</form>
+		</div>
 	</div>
+	
 </body>
 </html>
