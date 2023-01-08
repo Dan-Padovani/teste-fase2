@@ -7,6 +7,72 @@
 	<title>Preencha o formulário e retornaremos o contato</title>
 </head>
 <body>
-	
+	<header>
+		<h1>Não encontrou o que procurava?</h1>
+		<p>Preencha o formulário e retornaremos o contato.</p>
+	</header>
+	<div class="contact-us">
+		<form class="contact-form">
+			<div>
+				<label for="name">Nome:</label>
+				<input type="text" id="name" required>
+			</div>
+			<div>
+				<label for="e-mail">E-mail:</label>
+				<input type="email" id="e-mail" required>
+			</div>
+			<div>
+				<label for="phone-number">Telefone:</label>
+				<input type="text" id="phone-number" required>
+			</div>
+			<div>
+				<label for="birthday-date">Data de nascimento:</label>
+				<input type="date" id="birthday-date" required>
+			</div>
+			<div>
+				<label for="neighborhood">Bairro de Interesse:</label>
+				<select multiple size="5" id="neighborhood">
+					<option value="bairro1">Bairro 01</option>
+					<option value="bairro2">Bairro 02</option>
+					<option value="bairro3">Bairro 03</option>
+					<option value="bairro4">Bairro 04</option>
+					<option value="bairro5">Bairro 05</option>
+				</select>
+			</div>
+			<div>
+				<p>Período para Contato:</p>
+					<div>
+						<label for="contact-period">
+							<input type="radio" name="contact-period" value="manha">
+							Manhã
+						</label>
+					</div>
+					<div>
+						<label for="contact-period">
+							<input type="radio" name="contact-period" value="tarde">
+							Tarde
+						</label>
+					</div>
+					<div>
+						<label for="contact-period">
+							<input type="radio" name="contact-period" value="noite">
+							Noite
+						</label>
+					</div>
+			</div>
+			<div>
+				<p>Autoriza contato por telefone?</p>
+				<label for="contact-by-phone">
+					<input type="checkbox" name="contact-by-phone" value="yes">
+					Sim
+				</label>
+				<label for="contact-by-phone">
+					<input type="checkbox" name="contact-by-phone" value="no">
+					Não
+				</label>
+			</div>
+			<button>Enviar</button>
+		</form>
+	</div>
 </body>
 </html>
