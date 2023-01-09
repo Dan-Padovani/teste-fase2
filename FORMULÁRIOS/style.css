@@ -47,6 +47,10 @@ body::before {
 	border: 1px solid hsl(0, 100%, 50%);
 }
 
+.required-feedback {
+	color: hsl(0, 100%, 50%);
+}
+
 .button-submit {
 	background: hsl(210, 100%, 21%);
 	transition: 0.3s;
