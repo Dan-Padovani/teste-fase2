@@ -1,5 +1,4 @@
 const form = document.querySelector('.contact-form')
-
 const inputName = document.querySelector('#name')
 const inputEmail = document.querySelector('#e-mail')
 const inputPhoneNumber = document.querySelector('#phone-number')
@@ -10,12 +9,13 @@ const paragraphEmailFeedback = document.createElement('p')
 const paragraphPhoneNumberFeedback = document.createElement('p')
 const paragraphBirthdayDateFeedback = document.createElement('p')
 
-paragraphNameFeedback.setAttribute('data-feedback', 'submit-feedback')
-paragraphEmailFeedback.setAttribute('data-feedback', 'submit-feedback')
-paragraphPhoneNumberFeedback.setAttribute('data-feedback', 'submit-feedback')
-paragraphBirthdayDateFeedback.setAttribute('data-feedback', 'submit-feedback')
+// Attributes for submit and input validation
+paragraphNameFeedback.setAttribute('data-feedback', 'submit-name-feedback')
+paragraphEmailFeedback.setAttribute('data-feedback', 'submit-email-feedback')
+paragraphPhoneNumberFeedback.setAttribute('data-feedback', 'submit-phone-feedback')
+paragraphBirthdayDateFeedback.setAttribute('data-feedback', 'submit-birthday-feedback')
 
-
+// Objects feedback infos
 const requiredNameInfo = {
 	paragraph: paragraphNameFeedback, 
 	text: 'O campo nome é obrigatório', 
@@ -30,16 +30,17 @@ const requiredEmailInfo = {
 
 const requiredPhoneInfo = {
 	paragraph: paragraphPhoneNumberFeedback, 
-	text: 'Digite um telefone válido, apenas números',
+	text: 'Digite um telefone válido',
 	previousSibling: inputPhoneNumber
 }
 
 const requeredBirthdayDate = {
 	paragraph: paragraphBirthdayDateFeedback,
-	text: 'Digite uma data válida',
+	text: 'Digite ou selecione uma data válida',
 	previousSibling: inputBirthdayDate
 }
 
+// Imask cdn to verify phone number mask
 const dynamicMask = IMask(inputPhoneNumber, {
   mask: [
     {
@@ -51,6 +52,7 @@ const dynamicMask = IMask(inputPhoneNumber, {
   ]
 })
 
+// Function to insert feedback submit validation
 const insertParagraphIntoDOM = paragraphInfo => {
 	const {paragraph, text, previousSibling} = paragraphInfo
 	paragraph.textContent = text
@@ -58,131 +60,67 @@ const insertParagraphIntoDOM = paragraphInfo => {
 	previousSibling.insertAdjacentElement('afterend', paragraph)
 }
 
-const removeSubmitParagraph = () => {
-	const paragraphSubmitfeedbackExists = document.querySelector('[data-feedback = "submit-feedback"]')
+// Function to insert feedback submit validation
+const removeSubmitParagraph = feedback => {
+	const paragraphSubmitfeedbackExists = document
+		.querySelector(`[data-feedback = ${feedback}]`)
 	if (paragraphSubmitfeedbackExists) {
 		paragraphSubmitfeedbackExists.remove()
 	}
 }
 
-inputName.addEventListener('focus', () => {
-	removeSubmitParagraph()
+// Events to remove feedback paragraphs
+inputName.addEventListener('input', () => {
+	removeSubmitParagraph('submit-name-feedback')
 })
 
-inputEmail.addEventListener('focus', () => {
-	removeSubmitParagraph()
+inputEmail.addEventListener('input', () => {
+	removeSubmitParagraph('submit-email-feedback')
 })
 
-inputPhoneNumber.addEventListener('focus', () => {
-	removeSubmitParagraph()
+inputPhoneNumber.addEventListener('input', () => {
+	removeSubmitParagraph('submit-phone-feedback')
 })
 
-inputBirthdayDate.addEventListener('focus', () => {
-	removeSubmitParagraph()
+inputBirthdayDate.addEventListener('input', () => {
+	removeSubmitParagraph('submit-birthday-feedback')
 })
 
-
-form.addEventListener('submit', event => {
+const formValidation = event => {
 	event.preventDefault()
 
-	if (inputName.value === '') {
-		insertParagraphIntoDOM(requiredNameInfo)		
+	const isAValidEmail = !/^[\w\-.]+@([\w-]+.)+[\w-]{2,4}$/.test(inputEmail.value)
+	const isAValidPhoneNumer = inputPhoneNumber.value === '' ||
+		inputPhoneNumber.value.length < 14
+	const isAValidName = inputName.value === ''
+	const isAValidBirthdayDate = inputBirthdayDate.value === ''
+
+	let done = true
+
+	if (isAValidName) {
+		insertParagraphIntoDOM(requiredNameInfo)
+		done = false
 	}
 
-	if (!/^[\w\-.]+@([\w-]+.)+[\w-]{2,4}$/.test(inputEmail.value)) {
+	if (isAValidEmail) {
 		insertParagraphIntoDOM(requiredEmailInfo)
+		done = false
 	}
 
-	if (inputPhoneNumber.value === '' || inputPhoneNumber.value.length <= 13) {
+	if (isAValidPhoneNumer) {
 		insertParagraphIntoDOM(requiredPhoneInfo)
-
+		done = false
 	}
-	console.log(inputPhoneNumber.value.length)
 
-	if (inputBirthdayDate.value === '') {
+	if (isAValidBirthdayDate) {
 		insertParagraphIntoDOM(requeredBirthdayDate)
+		done = false
 	}
 
-})
+	if (done === true) {
+		alert('Obrigado pelas informações, em breve retornaremos o contato')
+		form.reset()
+	}
+}
 
-const element = document.getElementById('phone-number');
-// const maskOptions = 
-// 	{
-// 		mask: '(00) 00000-0000'
-// 	}
-// const mask = IMask(element, maskOptions);
-
-// var digitsMask = IMask(element, {
-//   mask: /^\d+$/
-// });
-
-// 
-
-// const dynamicMask = IMask(inputPhoneNumber, {
-//   mask: [
-//     {
-//       mask: '(00) 00000-0000',
-//     },
-//     {
-//       mask: '(00) 0000-0000'
-//     }
-//   ]
-// })
-
-//console.log(mask)
-
-
-// const phoneNumberTypes = {
-// 	mask: [
-// 		{
-// 			mask: '(00) 00000-0000',
-// 			regex: /^[1-9]{2}[0-9]{4,5}[0-9]{4}$/,
-		
-// 		},
-// 		{
-// 			mask: '(00) 0000-0000',
-// 			regex: /^[1-9]{2}[0-9]{4,5}[0-9]{4}$/,
-			
-// 		}
-// 	],
-// 	dispatch: function(appended, dynamicMasked) {
-// 		const number = (dynamicMasked.value + appended).replace(/\D/g, '')
-// 		const foundMask = dynamicMasked.compiledMasks.find(({regex}) => number.match(regex))
-
-// 		return foundMask
-// 	}
-// }
-// const phoneNumberMasked = IMask(element, phoneNumberTypes)
-
-
-
-
-
-// input only keys html onkeypress="return /[0-9]/i.test(event.key)"
-// regex phone /^(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$/
-
-
-
-
-// var dispatchMask = IMask(element, {
-// 	mask: [
-// 		{
-// 			mask: '(00) 00000-0000',			
-// 		},
-// 		{
-// 			mask: '(00) 0000-0000',
-// 		}
-// 	],
-// 	dispatch: function (appended, dynamicMasked) {
-// 		var number = (dynamicMasked.value + appended).replace(/\D/g,'');
-
-// 		return dynamicMasked.compiledMasks.find(function (m) {
-// 			return number.indexOf(m.startsWith) === 0;
-// 		});
-// 	}
-// }
-// )
-//console.log(mask)
-
-
-
+form.addEventListener('submit', formValidation)

@@ -54,6 +54,7 @@ body::before {
 
 .required-feedback {
 	color: hsl(0, 100%, 50%);
+	font-size: 14px;
 }
 
 .button-submit {
